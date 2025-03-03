@@ -1,7 +1,7 @@
 {
-    "name": "Personal Budget PWA",
-    "short_name": "Budget PWA",
-    "description": "A simple, offline, personal budget app with currency conversion and pie chart visualization.",
+    "name": "Personal Budget",
+    "short_name": "Budget",
+    "description": "Track your income and expenses, view your balance and transaction history.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
@@ -17,6 +17,5 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "scope": "/"
+    ]
 }
