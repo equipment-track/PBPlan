@@ -1,4 +1,3 @@
-// IndexedDB Setup
 let db;
 const request = indexedDB.open("BudgetDB", 1);
 
@@ -12,8 +11,7 @@ request.onsuccess = function(event) {
     loadTransactions();
 };
 
-// Conversion Rate (Static for Now, Can be Updated)
-const conversionRate = 22.2; // 1 QAR = 22.2 INR
+const conversionRate = 22.2; // Static conversion rate: 1 QAR = 22.2 INR
 
 function addTransaction() {
     let type = document.getElementById("type").value;
@@ -85,46 +83,4 @@ function updateCurrency() {
 
     document.getElementById("currencyLabel").textContent = currency;
     document.getElementById("currencyLabelIncome").textContent = currency;
-    document.getElementById("currencyLabelExpense").textContent = currency;
-}
-
-// Dynamic Category Input
-function checkOtherCategory() {
-    let category = document.getElementById("category").value;
-    document.getElementById("otherCategory").style.display = category === "Other" ? "block" : "none";
-}
-
-function drawPieChart(categoryData) {
-    const canvas = document.getElementById("pieChart");
-    const ctx = canvas.getContext("2d");
-
-    let total = 0;
-    for (let category in categoryData) {
-        total += categoryData[category];
-    }
-
-    let startAngle = 0;
-    let chartData = [];
-    for (let category in categoryData) {
-        let sliceAngle = (categoryData[category] / total) * 2 * Math.PI;
-        chartData.push({ category, value: categoryData[category], angle: sliceAngle, startAngle });
-        startAngle += sliceAngle;
-    }
-
-    chartData.forEach((data, index) => {
-        ctx.beginPath();
-        ctx.moveTo(150, 150); // center of the pie
-        ctx.arc(150, 150, 100, data.startAngle, data.startAngle + data.angle);
-        ctx.fillStyle = getRandomColor();
-        ctx.fill();
-    });
-}
-
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+    document.getElementById("currencyLabelExpense").textContent = currency
