@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json"> <!-- PWA Support -->
+</head>
+<body>
 
+    <!-- Dashboard Section -->
+    <div class="dashboard">
+        <h1>Budget Tracker</h1>
+        <h2>Total Balance: ₹<span id="totalBalance">0</span></h2>
+        <div class="summary">
+            <p>Income: ₹<span id="totalIncome">0</span></p>
+            <p>Expenses: ₹<span id="totalExpense">0</span></p>
+        </div>
+        <canvas id="pieChart" width="300" height="300"></canvas>
+    </div>
+
+    <!-- Add Transaction Section -->
+    <div class="add-transaction">
+        <h3>Add Transaction</h3>
+        <input type="date" id="date">
+        <select id="category">
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Transport">Transport</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="number" id="amount" placeholder="Enter amount">
+        <textarea id="notes" placeholder="Notes (optional)"></textarea>
+        <button onclick="addTransaction()">Save Transaction</button>
+    </div>
+
+    <!-- Transaction History -->
+    <div class="history">
+        <h3>Transaction History</h3>
+        <ul id="transactionList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
+
+</body>
+</html>
