@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Budget</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="manifest" href="../manifest.json">
 </head>
 <body>
 
-    <!-- Dashboard -->
     <div class="dashboard">
         <h1>Budget Tracker</h1>
         <h2>Total Balance: <span id="totalBalance">0</span> <span id="currencyLabel">QAR</span></h2>
@@ -17,47 +16,17 @@
             <p>Income: <span id="totalIncome">0</span> <span id="currencyLabelIncome">QAR</span></p>
             <p>Expenses: <span id="totalExpense">0</span> <span id="currencyLabelExpense">QAR</span></p>
         </div>
+        
         <canvas id="pieChart" width="300" height="300"></canvas>
+
+        <a href="transactions.html">View Transactions</a>
+        <a href="settings.html">Settings</a>
     </div>
 
-    <!-- Currency Selector -->
-    <div class="currency-section">
-        <label for="currency">View in:</label>
-        <select id="currency" onchange="updateCurrency()">
-            <option value="QAR">QAR</option>
-            <option value="INR">INR</option>
-        </select>
-    </div>
-
-    <!-- Add Transaction -->
-    <div class="add-transaction">
-        <h3>Add Transaction</h3>
-        <select id="type">
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-        </select>
-        <input type="date" id="date">
-        <select id="category" onchange="checkOtherCategory()">
-            <option value="Food">Food</option>
-            <option value="Rent">Rent</option>
-            <option value="Transport">Transport</option>
-            <option value="Other">Other</option>
-        </select>
-        <input type="text" id="otherCategory" placeholder="Enter other category" style="display: none;">
-        <input type="number" id="amount" placeholder="Enter amount">
-        <button onclick="addTransaction()">Save Transaction</button>
-    </div>
-
-    <!-- Transaction History -->
-    <div class="history">
-        <h3>Transaction History</h3>
-        <ul id="transactionList"></ul>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js');
+            navigator.serviceWorker.register('../service-worker.js');
         }
     </script>
 
