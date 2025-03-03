@@ -3,49 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#4CAF50">
-    <title>Personal Budget PWA</title>
+    <title>Personal Budget</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <div class="container">
-        <h1 class="header">Personal Budget</h1>
-        <div class="form-container">
-            <h2>Enter Transaction</h2>
-            <form id="transactionForm">
-                <select id="transactionType" required>
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                </select>
-                <input type="number" id="amount" placeholder="Amount (QAR)" required />
-                <input type="text" id="reason" placeholder="Reason" required />
-                <input type="text" id="notes" placeholder="Optional Notes" />
-                <select id="currency" required>
-                    <option value="QAR">QAR</option>
-                    <option value="INR">INR</option>
-                </select>
-                <button type="submit">Add Transaction</button>
-            </form>
-        </div>
 
-        <h2>Summary</h2>
-        <div id="pieChartContainer">
-            <canvas id="pieChart"></canvas>
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <h1>Budget Tracker</h1>
+        <h2>Total Balance: <span id="totalBalance">0</span> <span id="currencyLabel">QAR</span></h2>
+        <div class="summary">
+            <p>Income: <span id="totalIncome">0</span> <span id="currencyLabelIncome">QAR</span></p>
+            <p>Expenses: <span id="totalExpense">0</span> <span id="currencyLabelExpense">QAR</span></p>
         </div>
+        <canvas id="pieChart" width="300" height="300"></canvas>
+    </div>
 
-        <div id="targetAmount">
-            <h3>This Month's Target: <span id="targetAmountValue">0</span> QAR</h3>
-        </div>
-
-        <h3>Select Time Period for Pie Chart:</h3>
-        <select id="periodSelector">
-            <option value="weekly">This Week</option>
-            <option value="monthly">This Month</option>
-            <option value="yearly">This Year</option>
+    <!-- Currency Selector -->
+    <div class="currency-section">
+        <label for="currency">View in:</label>
+        <select id="currency" onchange="updateCurrency()">
+            <option value="QAR">QAR</option>
+            <option value="INR">INR</option>
         </select>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Add Transaction -->
+    <div class="add-transaction">
+        <h3>Add Transaction</h3>
+        <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+        <input type="date" id="date">
+        <select id="category" onchange="checkOtherCategory()">
+            <option value="Food">Food</option>
+            <option value="Rent">Rent</option>
+            <option value="Transport">Transport</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" id="otherCategory" placeholder="Enter other category" style="display: none;">
+        <input type="number" id="amount" placeholder="Enter amount">
+        <button onclick="addTransaction()">Save Transaction</button>
+    </div>
+
+    <!-- Transaction History -->
+    <div class="history">
+        <h3>Transaction History</h3>
+        <ul id="transactionList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
+
 </body>
 </html>
