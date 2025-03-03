@@ -16,55 +16,30 @@ header {
     animation: fadeIn 2s ease-in-out;
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    background-color: #333;
-    margin: 0;
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: #575757;
-}
-
 main {
     flex-grow: 1;
     padding: 20px;
     animation: slideIn 1s ease-in-out;
 }
 
-#budget-form {
+#transaction-form {
     display: flex;
     flex-direction: column;
     max-width: 400px;
     margin: 0 auto;
 }
 
-#budget-form label, #budget-form input, #budget-form button {
+#transaction-form label, #transaction-form select, #transaction-form input, #transaction-form textarea, #transaction-form button {
     margin-bottom: 10px;
 }
 
-#budget-form input {
+#transaction-form input, #transaction-form select, #transaction-form textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-#budget-form button {
+#transaction-form button {
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -74,15 +49,13 @@ main {
     transition: background-color 0.3s;
 }
 
-#budget-form button:hover {
+#transaction-form button:hover {
     background-color: #45a049;
 }
 
-#result {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 1.2em;
-    animation: fadeIn 1.5s ease-in-out;
+#records {
+    max-width: 800px;
+    margin: 20px auto;
 }
 
 footer {
