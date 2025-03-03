@@ -1,11 +1,10 @@
 {
     "name": "Personal Budget Calculator",
-    "short_name": "BudgetCal",
-    "start_url": "index.html",
+    "short_name": "BudgetCalc",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#4CAF50",
-    "theme_color": "#4CAF50",
-    "icons": [
+    "theme_color "icons": [
         {
             "src": "icon-192x192.png",
             "sizes": "192x192",
