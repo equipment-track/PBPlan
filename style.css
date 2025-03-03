@@ -6,14 +6,18 @@ body {
     padding: 20px;
 }
 
-.dashboard, .add-transaction, .history, .currency-section {
+.dashboard, .transaction-page, .settings {
     background: white;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.summary p {
+h1 {
+    color: #333;
+}
+
+h2, p {
     font-size: 18px;
     font-weight: bold;
 }
@@ -37,6 +41,20 @@ canvas {
     margin-top: 20px;
 }
 
-.currency-section {
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
     margin-top: 20px;
+    display: inline-block;
+}
+
+.transaction-page, .settings {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
