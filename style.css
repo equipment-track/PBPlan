@@ -1,38 +1,92 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #f4f4f4;
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
 }
 
-.dashboard, .add-transaction, .history, .currency-section {
-    background: white;
+.container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease;
+}
+
+.form-container {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-.summary p {
-    font-size: 18px;
-    font-weight: bold;
+h2, h3 {
+    color: #333;
 }
 
 input, select, button {
-    width: 90%;
-    margin: 5px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid gray;
+    margin: 10px 0;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #4CAF50;
+    outline: none;
 }
 
 button {
-    background: blue;
+    background-color: #4CAF50;
     color: white;
-    font-weight: bold;
+    border: none;
     cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 canvas {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+#targetAmount {
     margin-top: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    animation: fadeInUp 1s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
