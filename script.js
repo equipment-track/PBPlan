@@ -93,3 +93,38 @@ function checkOtherCategory() {
     let category = document.getElementById("category").value;
     document.getElementById("otherCategory").style.display = category === "Other" ? "block" : "none";
 }
+
+function drawPieChart(categoryData) {
+    const canvas = document.getElementById("pieChart");
+    const ctx = canvas.getContext("2d");
+
+    let total = 0;
+    for (let category in categoryData) {
+        total += categoryData[category];
+    }
+
+    let startAngle = 0;
+    let chartData = [];
+    for (let category in categoryData) {
+        let sliceAngle = (categoryData[category] / total) * 2 * Math.PI;
+        chartData.push({ category, value: categoryData[category], angle: sliceAngle, startAngle });
+        startAngle += sliceAngle;
+    }
+
+    chartData.forEach((data, index) => {
+        ctx.beginPath();
+        ctx.moveTo(150, 150); // center of the pie
+        ctx.arc(150, 150, 100, data.startAngle, data.startAngle + data.angle);
+        ctx.fillStyle = getRandomColor();
+        ctx.fill();
+    });
+}
+
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
