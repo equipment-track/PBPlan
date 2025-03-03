@@ -1,24 +1,25 @@
-const CACHE_NAME = 'budget-pwa-cache';
+const CACHE_NAME = 'budget-pwa-cache-v1';
 const urlsToCache = [
     '/',
     '/index.html',
     '/style.css',
-    '/app.js',
+    '/script.js',
     '/manifest.json',
-    '/service-worker.js'
+    '/icons/icon-192x192.png',
+    '/icons/icon-512x512.png'
 ];
 
-// Install service worker and cache essential assets
+// Install the service worker and cache required files
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             console.log('Opened cache');
             return cache.addAll(urlsToCache);
-        })
-    );
+});
+    });
 });
 
-// Activate service worker
+// Activate the service worker and clear old caches
 self.addEventListener('activate', (event) => {
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
@@ -34,11 +35,14 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch request from the cache or network
+// Fetch the requests from the cache and network (Offline support)
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
-            return cachedResponse || fetch(event.request);
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+            return fetch(event.request);
         })
     );
 });
