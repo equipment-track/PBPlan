@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.dashboard {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.summary p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.add-transaction, .history {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+input, select, textarea, button {
+    width: 90%;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+button {
+    background: blue;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+canvas {
+    margin-top: 20px;
+}
