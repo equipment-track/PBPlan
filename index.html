@@ -3,32 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Budget</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
+    <title>Personal Budget Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div class="dashboard">
-        <h1>Budget Tracker</h1>
-        <h2>Total Balance: <span id="totalBalance">0</span> <span id="currencyLabel">QAR</span></h2>
-        <div class="summary">
-            <p>Income: <span id="totalIncome">0</span> <span id="currencyLabelIncome">QAR</span></p>
-            <p>Expenses: <span id="totalExpense">0</span> <span id="currencyLabelExpense">QAR</span></p>
-        </div>
-        
-        <canvas id="pieChart" width="300" height="300"></canvas>
-
-        <a href="transactions.html">View Transactions</a>
-        <a href="settings.html">Settings</a>
-    </div>
-
+    <header>
+        <h1>Personal Budget Calculator</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#budget">Budget</a></li>
+            <li><a href="#reports">Reports</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="budget">
+            <h2>Calculate Your Budget</h2>
+            <form id="budget-form">
+                <label for="income">Income:</label>
+                <input type="number" id="income" required>
+                
+                <label for="expenses">Expenses:</label>
+                <input type="number" id="expenses" required>
+                
+                <button type="button" onclick="calculateBudget()">Calculate</button>
+            </form>
+            <div id="result"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Personal Budget Calculator</p>
+    </footer>
     <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js');
-        }
-    </script>
-
 </body>
 </html>
