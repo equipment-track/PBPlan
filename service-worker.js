@@ -1,12 +1,12 @@
 const cacheName = 'budget-calculator-v1';
 const assets = [
     './',
-    './index.html',
-    './styles.css',
-    './script.js',
-    './manifest.json',
-    './icon-192x192.png',
-    './icon-512x512.png'
+    'index.html',
+    'styles.css',
+    'script.js',
+    'manifest.json',
+    'icon-192x192.png',
+    'icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
