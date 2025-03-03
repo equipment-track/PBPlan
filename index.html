@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Budget Calculator</title>
+    <title>Income and Expenses Tracker</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-  <script>
+    <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js')
                 .then(function(registration) {
@@ -19,33 +19,40 @@
 </head>
 <body>
     <header>
-        <h1>Personal Budget Calculator</h1>
+        <h1>Income and Expenses Tracker</h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#budget">Budget</a></li>
-            <li><a href="#reports">Reports</a></li>
-        </ul>
-    </nav>
     <main>
-        <section id="budget">
-            <h2>Calculate Your Budget</h2>
-            <form id="budget-form">
-                <label for="income">Income:</label>
-                <input type="number" id="income" required>
+        <section id="input-form">
+            <h2>Input Income and Expenses</h2>
+            <form id="transaction-form">
+                <label for="type">Type:</label>
+                <select id="type">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" required>
                 
-                <label for="expenses">Expenses:</label>
-                <input type="number" id="expenses" required>
-                
-                <button type="button" onclick="calculateBudget()">Calculate</button>
+                <button type="button" onclick="addTransaction()">Add Transaction</button>
             </form>
             <div id="result"></div>
         </section>
+        <section id="charts">
+            <h2>Visualize Transactions</h2>
+            <select id="time-period" onchange="updateChart()">
+                <option value="today">Today</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+            </select>
+            <canvas id="pieChart"></canvas>
+        </section>
     </main>
     <footer>
-        <p>&copy; 2025 Personal Budget Calculator</p>
+        <p>&copy; 2025 Income and Expenses Tracker</p>
     </footer>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
