@@ -1,19 +1,18 @@
 {
-    "name": "Personal Budget",
-    "short_name": "Budget App",
-    "description": "Track your personal budget and transactions offline",
-    "start_url": "index.html",
+    "name": "Personal Budget Calculator",
+    "short_name": "BudgetCalc",
+    "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#000000",
+    "background_color": "#4CAF50",
+    "theme_color": "#4CAF50",
     "icons": [
         {
-            "src": "icons/icon-192x192.png",
+            "src": "icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "icons/icon-512x512.png",
+            "src": "icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
