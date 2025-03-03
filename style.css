@@ -6,7 +6,7 @@ body {
     padding: 20px;
 }
 
-.dashboard {
+.dashboard, .add-transaction, .history, .currency-section {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -18,14 +18,7 @@ body {
     font-weight: bold;
 }
 
-.add-transaction, .history {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-input, select, textarea, button {
+input, select, button {
     width: 90%;
     margin: 5px;
     padding: 10px;
