@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Budget</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Personal Budget App</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <script>
+ <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js')
                 .then(function(registration) {
@@ -18,22 +18,67 @@
     </script>
 </head>
 <body>
+    <header>
+        <h1>Personal Budget</h1>
+        <nav>
+            <button onclick="showPage('dashboard')">Dashboard</button>
+            <button onclick="showPage('transaction')">New Transaction</button>
+            <button onclick="showPage('records')">Records</button>
+            <button onclick="showPage('settings')">Settings</button>
+        </nav>
+    </header>
 
-    <!-- Navigation Tabs -->
-    <div class="nav">
-        <button onclick="showTab('dashboard')">Dashboard</button>
-        <button onclick="showTab('transaction')">Transaction Input</button>
-        <button onclick="showTab('records')">Records</button>
-        <button onclick="showTab('settings')">Settings</button>
-    </div>
+    <section id="dashboard" class="page">
+        <h2>Dashboard</h2>
+        <p>Target: <span id="targetAmount">0</span> QAR</p>
+        <p>Total Income: <span id="totalIncome">0</span> QAR</p>
+        <p>Total Expenses: <span id="totalExpenses">0</span> QAR</p>
+        <p>Balance: <span id="balance">0</span> QAR</p>
+        <canvas id="expenseChart"></canvas>
+    </section>
 
-    <!-- Content Sections -->
-    <div id="dashboard" class="tab-content">Welcome to the Dashboard</div>
-    <div id="transaction" class="tab-content" style="display: none;">This is the Transaction Input Page</div>
-    <div id="records" class="tab-content" style="display: none;">Here you can see your Records</div>
-    <div id="settings" class="tab-content" style="display: none;">Settings Page</div>
+    <section id="transaction" class="page hidden">
+        <h2>New Transaction</h2>
+        <label>
+            Type:
+            <select id="transactionType">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        </label>
+        <label>
+            Reason:
+            <select id="reason">
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Other">Other</option>
+            </select>
+        </label>
+        <input type="text" id="otherReason" placeholder="Enter reason" class="hidden">
+        <label>Amount: <input type="number" id="amount"></label>
+        <label>Notes: <input type="text" id="notes"></label>
+        <button onclick="addTransaction()">Add Transaction</button>
+    </section>
 
-    <script src="script.js"></script>
+    <section id="records" class="page hidden">
+        <h2>Transaction Records</h2>
+        <ul id="transactionList"></ul>
+    </section>
 
+    <section id="settings" class="page hidden">
+        <h2>Settings</h2>
+        <label>
+            Monthly Target:
+            <input type="number" id="monthlyTarget" oninput="updateTarget()">
+        </label>
+        <p>Currency: 
+            <select id="currency">
+                <option value="QAR">QAR</option>
+                <option value="INR">INR</option>
+            </select>
+        </p>
+    </section>
+
+    <script src="app.js"></script>
 </body>
 </html>
