@@ -8,8 +8,18 @@
 </head>
 <body>
 
-    <!-- Dashboard -->
-    <div class="dashboard">
+    <!-- Top Navigation (Tabs) -->
+    <div class="navbar">
+        <ul>
+            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Dashboard')">Dashboard</a></li>
+            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Transaction')">Transaction Input</a></li>
+            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Records')">Records</a></li>
+            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Settings')">Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Dashboard Tab Content -->
+    <div id="Dashboard" class="tabcontent">
         <h1>Budget Tracker</h1>
         <h2>Total Balance: <span id="totalBalance">0</span> <span id="currencyLabel">QAR</span></h2>
         <div class="summary">
@@ -19,17 +29,8 @@
         <canvas id="pieChart" width="300" height="300"></canvas>
     </div>
 
-    <!-- Currency Selector -->
-    <div class="currency-section">
-        <label for="currency">View in:</label>
-        <select id="currency" onchange="updateCurrency()">
-            <option value="QAR">QAR</option>
-            <option value="INR">INR</option>
-        </select>
-    </div>
-
-    <!-- Add Transaction -->
-    <div class="add-transaction">
+    <!-- Transaction Tab Content -->
+    <div id="Transaction" class="tabcontent">
         <h3>Add Transaction</h3>
         <select id="type">
             <option value="income">Income</option>
@@ -47,14 +48,14 @@
         <button onclick="addTransaction()">Save Transaction</button>
     </div>
 
-    <!-- Transaction History -->
-    <div class="history">
+    <!-- Records Tab Content -->
+    <div id="Records" class="tabcontent">
         <h3>Transaction History</h3>
         <ul id="transactionList"></ul>
     </div>
 
-    <!-- Settings -->
-    <div class="settings">
+    <!-- Settings Tab Content -->
+    <div id="Settings" class="tabcontent">
         <h3>Settings</h3>
         
         <!-- Monthly Target -->
@@ -84,6 +85,5 @@
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
