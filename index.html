@@ -46,10 +46,17 @@
         <button onclick="addTransaction()">Save Transaction</button>
     </div>
 
-    <div id="Records" class="tabcontent">
-        <h3>Transaction History</h3>
-        <ul id="transactionList"></ul>
-    </div>
+   <div id="Records" class="tabcontent">
+    <h3>Transaction History</h3>
+    
+    <label for="currencySwitch">Select Currency:</label>
+    <select id="currencySwitch">
+        <option value="QAR">QAR</option>
+        <option value="INR">INR</option>
+    </select>
+
+    <ul id="transactionList"></ul>
+</div>
 
    <div id="Settings" class="tabcontent">
     <h3>Settings</h3>
