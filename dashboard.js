@@ -1,50 +1,52 @@
 function loadDashboard() {
-    // Retrieve transactions and target from localStorage
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    let estimatedTarget = parseFloat(localStorage.getItem("estimatedTarget")) || 0;
-    
-    let totalIncome = 0, totalExpense = 0;
+    let totalIncome = 0, totalExpense = 0, target = localStorage.getItem("estimatedTarget") || 0;
 
-    // Calculate total income and expense
     transactions.forEach((tx) => {
         if (tx.type === "income") totalIncome += tx.amount;
         else totalExpense += tx.amount;
     });
 
-    let totalBalance = estimatedTarget + totalIncome - totalExpense;
-
-    // Update the dashboard elements
-    document.getElementById("estimatedTarget").textContent = estimatedTarget.toFixed(2);
-    document.getElementById("totalIncome").textContent = totalIncome.toFixed(2);
-    document.getElementById("totalExpense").textContent = totalExpense.toFixed(2);
+    let totalBalance = totalIncome - totalExpense;
     document.getElementById("totalBalance").textContent = totalBalance.toFixed(2);
 
-    // Update the pie chart
-    updatePieChart(totalIncome, totalExpense);
+    // Update the pie chart with the new data
+    updatePieChart(totalIncome, totalExpense, target);
 }
 
 // **Pie Chart**
-function updatePieChart(income, expense) {
+function updatePieChart(income, expense, target) {
     let ctx = document.getElementById("pieChart").getContext("2d");
     if (window.pieChartInstance) window.pieChartInstance.destroy();
 
     window.pieChartInstance = new Chart(ctx, {
         type: "pie",
         data: {
-            labels: ["Income", "Expenses"],
+            labels: ["Income", "Expense", "Target"],
             datasets: [{
-                data: [income, expense],
-                backgroundColor: ["#4CAF50", "#FF5733"]
+                data: [income, expense, target],
+                backgroundColor: ["#4CAF50", "#FF5733", "#FFEB3B"], // Colors: Green (Income), Red (Expense), Yellow (Target)
+                hoverBackgroundColor: ["#388E3C", "#D32F2F", "#FBC02D"], // Slightly darker colors on hover
+                hoverBorderColor: "#fff", // White border on hover
+                borderWidth: 2, // Border width for each segment
             }]
         },
         options: {
+            responsive: true,
             plugins: {
+                legend: {
+                    position: "top",
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
                 tooltip: {
                     callbacks: {
                         label: function(tooltipItem) {
-                            let value = tooltipItem.raw;
-                            let percentage = ((value / (income + expense)) * 100).toFixed(2);
-                            return value + " QAR (" + percentage + "%)";
+                            let percentage = Math.round(tooltipItem.raw / tooltipItem.dataset._meta[Object.keys(tooltipItem.dataset._meta)[0]].total * 100);
+                            return tooltipItem.label + ": " + tooltipItem.raw + " QAR (" + percentage + "%)";
                         }
                     }
                 }
@@ -53,5 +55,4 @@ function updatePieChart(income, expense) {
     });
 }
 
-// Load the dashboard when the page is loaded
 document.addEventListener("DOMContentLoaded", loadDashboard);
