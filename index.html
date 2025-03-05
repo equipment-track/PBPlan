@@ -5,109 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Budget</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-    <!-- Top Navigation (Tabs) -->
-    <div class="navbar">
-        <ul>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Dashboard')">Dashboard</a></li>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Transaction')">Transaction Input</a></li>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Records')">Records</a></li>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Settings')">Settings</a></li>
-        </ul>
-    </div>
+    <nav class="tabs">
+        <button onclick="navigate('index.html')">Dashboard</button>
+        <button onclick="navigate('transaction.html')">Transaction Input</button>
+        <button onclick="navigate('records.html')">Records</button>
+        <button onclick="navigate('settings.html')">Settings</button>
+    </nav>
 
-    <!-- Dashboard Tab Content -->
-    <div id="Dashboard" class="tabcontent">
-        <h1>Budget Tracker</h1>
-        <h2>Total Balance: <span id="totalBalance">0</span> <span id="currencyLabel">QAR</span></h2>
-        <div class="summary">
-            <p>Income: <span id="totalIncome">0</span> <span id="currencyLabelIncome">QAR</span></p>
-            <p>Expenses: <span id="totalExpense">0</span> <span id="currencyLabelExpense">QAR</span></p>
-        </div>
-        <canvas id="pieChart" width="300" height="300"></canvas>
-    </div>
-
-    <!-- Transaction Tab Content -->
-    <div id="Transaction" class="tabcontent">
-        <h3>Add Transaction</h3>
-        <!-- Income/Expense Type -->
-        <select id="type">
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-        </select>
-        
-        <!-- QAR/INR Currency -->
-        <select id="currency">
-            <option value="QAR">QAR</option>
-            <option value="INR">INR</option>
-        </select>
-
-        <!-- Date Selection -->
-        <input type="date" id="date">
-        
-        <!-- Category Selection -->
-        <select id="category" onchange="checkOtherCategory()">
-            <option value="Food">Food</option>
-            <option value="Rent">Rent</option>
-            <option value="Transport">Transport</option>
-            <option value="Other">Other</option>
-        </select>
-        
-        <!-- Other Category Input -->
-        <input type="text" id="otherCategory" placeholder="Enter other category" style="display: none;">
-        
-        <!-- Amount -->
-        <input type="number" id="amount" placeholder="Enter amount">
-        
-        <!-- Save Button -->
-        <button onclick="addTransaction()">Save Transaction</button>
-    </div>
-
-    <!-- Records Tab Content -->
-    <div id="Records" class="tabcontent">
-        <h3>Transaction History</h3>
-        <ul id="transactionList"></ul>
-    </div>
-
-    <!-- Settings Tab Content -->
-    <div id="Settings" class="tabcontent">
-        <h3>Settings</h3>
-        
-        <!-- Monthly Target -->
-        <label for="monthlyTarget">Monthly Target:</label>
-        <select id="monthlyTarget">
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-        </select>
-
-        <input type="number" id="targetValue" placeholder="Enter monthly target">
-        
-        <!-- INR Conversion Rate -->
-        <label for="inrRate">INR Conversion Rate:</label>
-        <input type="number" id="inrRate" placeholder="Enter INR rate">
-
-        <!-- Notifications -->
-        <label for="notificationTime">Daily Reminder Time:</label>
-        <input type="time" id="notificationTime">
-
-        <!-- Threshold Notifications -->
-        <label for="thresholdNotifications">Threshold Notifications:</label>
-        <input type="checkbox" id="thresholdNotifications">
-        
-        <!-- Save Button -->
-        <button onclick="saveSettings()">Save Settings</button>
+    <div id="content">
+        <h1>Welcome to Personal Budget Tracker</h1>
+        <p>Select a tab to get started.</p>
     </div>
 
     <script src="script.js"></script>
