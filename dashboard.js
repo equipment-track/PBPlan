@@ -1,6 +1,6 @@
 function loadDashboard() {
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    let totalIncome = 0, totalExpense = 0, target = parseFloat(localStorage.getItem("estimatedTarget")) || 0;
+    let totalIncome = 0, totalExpense = 0, target = parseFloat(localStorage.getItem("monthlyTarget")) || 0;
 
     transactions.forEach(tx => {
         if (tx.type === "income") totalIncome += tx.amount;
