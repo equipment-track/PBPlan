@@ -1,79 +1,52 @@
-// Function to handle tab switching
-function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-
-    // Hide all tab content
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+// Tab Switching Logic
+function showTab(tabId) {
+    let tabs = document.getElementsByClassName("tab-content");
+    for (let tab of tabs) {
+        tab.style.display = "none";
     }
-
-    // Remove active class from all tablinks
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-    }
-
-    // Show the clicked tab and add active class
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.classList.add("active");
+    document.getElementById(tabId).style.display = "block";
 }
 
-// By default, open the Dashboard tab
-document.getElementsByClassName("tablinks")[0].click();
-
-// Function to add transaction
-function addTransaction() {
-    var type = document.getElementById('type').value;
-    var date = document.getElementById('date').value;
-    var category = document.getElementById('category').value;
-    var otherCategory = document.getElementById('otherCategory').value;
-    var amount = document.getElementById('amount').value;
-    var currency = document.getElementById('currency').value;
-    
-    if (type && date && amount && (category !== "Other" || (category === "Other" && otherCategory))) {
-        var transaction = {
-            type: type,
-            date: date,
-            category: category === "Other" ? otherCategory : category,
-            amount: amount,
-            currency: currency
-        };
-        
-        var transactionList = document.getElementById('transactionList');
-        var li = document.createElement('li');
-        li.textContent = `${transaction.date} | ${transaction.type.toUpperCase()} | ${transaction.category} | ${transaction.amount} ${transaction.currency}`;
-        transactionList.appendChild(li);
-
-        alert("Transaction Saved!");
-    } else {
-        alert("Please fill all the mandatory fields!");
-    }
-}
-
-// Function to show other category input if "Other" is selected
+// Show/Hide "Other" Category Input
 function checkOtherCategory() {
-    var category = document.getElementById('category').value;
-    var otherCategoryInput = document.getElementById('otherCategory');
-    
-    if (category === "Other") {
-        otherCategoryInput.style.display = "inline";
-    } else {
-        otherCategoryInput.style.display = "none";
-    }
+    let category = document.getElementById("category").value;
+    document.getElementById("otherCategory").style.display = category === "other" ? "block" : "none";
 }
 
-// Function to save settings
-function saveSettings() {
-    var monthlyTarget = document.getElementById('monthlyTarget').value;
-    var targetValue = document.getElementById('targetValue').value;
-    var inrRate = document.getElementById('inrRate').value;
-    var notificationTime = document.getElementById('notificationTime').value;
-    var thresholdNotifications = document.getElementById('thresholdNotifications').checked;
+// Save Transaction
+function saveTransaction() {
+    let type = document.getElementById("type").value;
+    let currency = document.getElementById("currency").value;
+    let category = document.getElementById("category").value;
+    let amount = parseFloat(document.getElementById("amount").value);
+    let date = document.getElementById("date").value;
 
-    if (monthlyTarget && targetValue && inrRate && notificationTime) {
-        alert(`Settings Saved!\nTarget: ${targetValue} for ${monthlyTarget} \nINR Rate: ${inrRate} \nNotification Time: ${notificationTime} \nThreshold Notifications: ${thresholdNotifications}`);
-    } else {
-        alert("Please fill in all the required settings fields.");
+    if (category === "other") {
+        category = document.getElementById("otherCategory").value || "Other";
     }
+
+    if (!amount || !date) {
+        alert("Please fill all required fields!");
+        return;
+    }
+
+    let conversionRate = parseFloat(localStorage.getItem("conversionRate")) || 22.2;
+    let storedAmount = currency === "INR" ? amount / conversionRate : amount;
+
+    let transaction = { type, category, amount: storedAmount, date };
+    localStorage.setItem("transactions", JSON.stringify(transaction));
+
+    alert("Transaction saved!");
+}
+
+// Save Settings
+function saveSettings() {
+    let target = document.getElementById("monthlyTarget").value;
+    let conversionRate = document.getElementById("conversionRate").value;
+    let reminderTime = document.getElementById("reminderTime").value;
+    let dailyReminder = document.getElementById("dailyReminder").checked;
+    let thresholdNotification = document.getElementById("thresholdNotification").checked;
+
+    localStorage.setItem("conversionRate", conversionRate);
+    alert("Settings saved!");
 }
