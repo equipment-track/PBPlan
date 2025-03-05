@@ -3,84 +3,84 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Google's default font */
 }
 
 /* 📌 Navbar Styling (Fixed Top, Horizontal, Scrollable) */
 .navbar {
-    background: rgba(0, 0, 0, 0.6); /* Background for the navbar */
-    padding: 10px 0; /* Padding for spacing */
-    position: fixed; /* Fixed at the top */
-    width: 100%; /* Full width */
-    top: 0; /* Aligns it to the top */
-    left: 0; /* Aligns it to the left */
-    z-index: 1000; /* Keeps it above other elements */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow below the navbar */
-    overflow-x: auto; /* Allows horizontal scrolling */
-    white-space: nowrap; /* Prevents wrapping of nav items */
+    background: rgba(255, 255, 255, 0.8); /* Light background for the navbar */
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a light feel */
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 /* 📌 Navbar list and items */
 .navbar ul {
-    list-style: none; /* Removes default list styles */
-    display: flex; /* Aligns the items in a row */
-    justify-content: flex-start; /* Aligns tabs to the left */
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
     padding: 0;
-    overflow-x: auto; /* Allows scrolling if there are too many tabs */
-    scrollbar-width: none; /* Hides the scrollbar for a cleaner look */
+    overflow-x: auto;
+    scrollbar-width: none;
 }
 
 .navbar ul::-webkit-scrollbar {
-    display: none; /* Hides the scrollbar in webkit-based browsers */
+    display: none;
 }
 
 .navbar ul li {
-    flex-shrink: 0; /* Prevents items from shrinking */
-    margin: 0 8px; /* Adds space between the items */
+    flex-shrink: 0;
+    margin: 0 8px;
 }
 
 .navbar ul li a {
-    text-decoration: none; /* Removes the underline from links */
-    color: #ffdd57; /* Text color */
-    font-weight: 600; /* Bold font */
-    transition: all 0.3s ease; /* Smooth transition for hover effect */
-    padding: 10px 15px; /* Adds padding inside each tab */
-    border-radius: 5px; /* Rounds the corners */
-    display: inline-block; /* Keeps them inline but allows block-level properties */
-    white-space: nowrap; /* Prevents text wrapping */
+    text-decoration: none;
+    color: #4285F4; /* Google's blue color */
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .navbar ul li a:hover {
-    background: #ff5733; /* Background color when hovered */
-    color: white; /* Text color when hovered */
+    background: #34A853; /* Google's green color */
+    color: white;
 }
 
 /* 🏗️ Prevent Overlapping - Add Space Below Navbar */
 body {
-    background: linear-gradient(135deg, #1e1e2f, #2c3e50);
-    color: #ffffff;
+    background: #f5f5f5; /* Light grey background for a clean feel */
+    color: #333;
     text-align: center;
     min-height: 100vh;
-    padding-top: 60px; /* Ensures content starts below navbar */
+    padding-top: 60px;
 }
 
 /* 🌟 Tab Content Styling (Loads Below Tabs) */
 .tabcontent {
     display: none;
     padding: 25px;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.6s ease-in-out; /* Smoother fade-in animation */
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 80px auto 20px; /* Adjusted margin for proper spacing */
+    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for a clean UI */
+    margin: 80px auto 20px;
     max-width: 600px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
 }
 
 /* 🎬 Smooth Fade-in Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -92,47 +92,52 @@ body {
 h1 {
     font-size: 28px;
     margin-bottom: 10px;
-    color: #ffdd57;
+    color: #4285F4; /* Google's blue color */
 }
 
 h2 {
     font-size: 22px;
-    color: #ff7f50;
+    color: #34A853; /* Google's green color */
 }
 
 .summary p {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
     margin: 8px 0;
 }
 
 /* 💸 Transaction Form */
 select, input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 10px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid #ccc; /* Light border for input fields */
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background: rgba(0, 0, 0, 0.05);
+    color: #333;
     outline: none;
+    transition: border-color 0.3s ease;
 }
 
 input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 select option {
-    background: #2c3e50;
-    color: white;
+    background: #f5f5f5;
+    color: #333;
+}
+
+input:focus, select:focus {
+    border-color: #4285F4; /* Google's blue color */
 }
 
 /* 💾 Save Button */
 button {
     width: 100%;
     padding: 12px;
-    background: #ff5733;
+    background: #34A853; /* Google's green color */
     border: none;
     border-radius: 5px;
     color: white;
@@ -143,7 +148,7 @@ button {
 }
 
 button:hover {
-    background: #ff4500;
+    background: #1C8038; /* Darker green shade for hover effect */
     transform: scale(1.05);
 }
 
@@ -154,7 +159,7 @@ button:hover {
 }
 
 #transactionList li {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.6);
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
