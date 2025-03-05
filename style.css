@@ -3,83 +3,77 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif; /* Google Font for a more modern feel */
+    font-family: 'Poppins', sans-serif;
 }
 
-/* 📌 Navbar Styling (Fixed Top, Horizontal) */
+/* 📌 Navbar Styling (Fixed Top, Horizontal, Scrollable) */
 .navbar {
-    background: #6200ea; /* Purple color (Google Material Design) */
-    padding: 15px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
+    background: rgba(0, 0, 0, 0.6); /* Background for the navbar */
+    padding: 10px 0; /* Padding for spacing */
+    position: fixed; /* Fixed at the top */
+    width: 100%; /* Full width */
+    top: 0; /* Aligns it to the top */
+    left: 0; /* Aligns it to the left */
+    z-index: 1000; /* Keeps it above other elements */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow below the navbar */
+    overflow-x: auto; /* Allows horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping of nav items */
 }
 
+/* 📌 Navbar list and items */
 .navbar ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
+    list-style: none; /* Removes default list styles */
+    display: flex; /* Aligns the items in a row */
+    justify-content: flex-start; /* Aligns tabs to the left */
     padding: 0;
-    margin: 0;
-    overflow-x: auto; /* Allows scrolling if too many tabs */
+    overflow-x: auto; /* Allows scrolling if there are too many tabs */
+    scrollbar-width: none; /* Hides the scrollbar for a cleaner look */
+}
+
+.navbar ul::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar in webkit-based browsers */
 }
 
 .navbar ul li {
-    margin: 0 15px;
+    flex-shrink: 0; /* Prevents items from shrinking */
+    margin: 0 8px; /* Adds space between the items */
 }
 
 .navbar ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    padding: 12px 20px;
-    border-radius: 8px;
-    display: inline-block;
-    white-space: nowrap;
+    text-decoration: none; /* Removes the underline from links */
+    color: #ffdd57; /* Text color */
+    font-weight: 600; /* Bold font */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    padding: 10px 15px; /* Adds padding inside each tab */
+    border-radius: 5px; /* Rounds the corners */
+    display: inline-block; /* Keeps them inline but allows block-level properties */
+    white-space: nowrap; /* Prevents text wrapping */
 }
 
 .navbar ul li a:hover {
-    background: #3700b3;
-    color: white;
+    background: #ff5733; /* Background color when hovered */
+    color: white; /* Text color when hovered */
 }
 
 /* 🏗️ Prevent Overlapping - Add Space Below Navbar */
 body {
-    background: #f5f5f5;
-    color: #333;
+    background: linear-gradient(135deg, #1e1e2f, #2c3e50);
+    color: #ffffff;
     text-align: center;
     min-height: 100vh;
-    padding-top: 80px; /* Ensures content starts below navbar */
+    padding-top: 60px; /* Ensures content starts below navbar */
 }
 
-/* 🌟 Tab Content Styling (Horizontal Layout) */
-.tabcontainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 20px 0;
-}
-
+/* 🌟 Tab Content Styling (Loads Below Tabs) */
 .tabcontent {
     display: none;
     padding: 25px;
-    border-radius: 10px;
-    background: #ffffff;
-    margin: 20px;
-    max-width: 600px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.5s ease-in-out;
-    width: 100%;
-}
-
-.tabcontent.active {
-    display: block;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 80px auto 20px; /* Adjusted margin for proper spacing */
+    max-width: 600px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* 🎬 Smooth Fade-in Animation */
@@ -94,139 +88,100 @@ body {
     }
 }
 
-/* 📊 Dashboard and Records Styling */
-h3, h2 {
-    color: #6200ea;
-    margin-bottom: 20px;
+/* 📊 Dashboard */
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #ffdd57;
+}
+
+h2 {
+    font-size: 22px;
+    color: #ff7f50;
 }
 
 .summary p {
     font-size: 18px;
     font-weight: bold;
-    margin: 12px 0;
+    margin: 8px 0;
 }
 
-#transactionList {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-#transactionList li {
-    background: #fafafa;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
-    font-size: 16px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 💸 Form Inputs Styling */
+/* 💸 Transaction Form */
 select, input {
     width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
     font-size: 16px;
-    background: #f1f1f1;
-    color: #333;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
     outline: none;
-    transition: background 0.3s ease;
 }
 
-select:focus, input:focus {
-    background: #e8e8e8;
-    border-color: #6200ea;
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+select option {
+    background: #2c3e50;
+    color: white;
 }
 
 /* 💾 Save Button */
 button {
     width: 100%;
-    padding: 15px;
-    background: #6200ea;
+    padding: 12px;
+    background: #ff5733;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: 18px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 button:hover {
-    background: #3700b3;
+    background: #ff4500;
     transform: scale(1.05);
 }
 
-/* 🎨 Filter Section Styling */
-.filter-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.filter-group label {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-    display: block;
-    margin-bottom: 8px;
-}
-
-#categoryFilter, #dateFilter, #currencySwitch {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border-radius: 10px;
-    font-size: 16px;
-    background: #f1f1f1;
-    border: 1px solid #ddd;
-}
-
-/* 📜 Transaction History Section */
+/* 📜 Records */
 #transactionList {
+    list-style: none;
     padding: 0;
-    margin-top: 20px;
 }
 
 #transactionList li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
     font-size: 16px;
-    background: #f9f9f9;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* ⚙️ Settings & Other Sections */
-#settings {
-    margin-top: 20px;
-}
-
+/* ⚙️ Settings */
 #settings label {
     font-size: 16px;
-    margin-bottom: 10px;
     display: block;
+    margin: 10px 0 5px;
 }
 
 /* 📱 Responsive Fixes */
 @media screen and (max-width: 600px) {
     .navbar ul {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 5px;
     }
 
     .navbar ul li {
-        margin: 8px 0;
-    }
-
-    .tabcontainer {
-        flex-direction: column;
-        align-items: center;
+        margin: 5px;
     }
 
     .tabcontent {
         max-width: 90%;
-        padding: 20px;
     }
 }
