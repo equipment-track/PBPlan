@@ -51,12 +51,33 @@
         <ul id="transactionList"></ul>
     </div>
 
-    <div id="Settings" class="tabcontent">
-        <h3>Settings</h3>
-        <input type="number" id="targetValue" placeholder="Enter monthly target">
-        <input type="number" id="inrRate" placeholder="Enter INR rate">
-        <button onclick="saveSettings()">Save Settings</button>
+   <div id="Settings" class="tabcontent">
+    <h3>Settings</h3>
+    
+    <input type="number" id="targetValue" placeholder="Enter monthly target">
+    <input type="number" id="inrRate" placeholder="Enter INR rate">
+    
+    <label for="dailyReminder">Enable Daily Reminder:</label>
+    <input type="checkbox" id="dailyReminder" onchange="toggleReminderTimeInput()">
+    
+    <div id="reminderTimeSection" style="display:none;">
+        <label for="reminderTime">Select Reminder Time:</label>
+        <input type="time" id="reminderTime">
     </div>
+    
+    <label for="thresholdNotifications">Enable Threshold Notifications:</label>
+    <input type="checkbox" id="thresholdNotifications">
+    
+    <label for="customReminderDate">Select Custom Reminder Date:</label>
+    <input type="date" id="customReminderDate">
+    
+    <label for="customReminderTime">Select Custom Reminder Time:</label>
+    <input type="time" id="customReminderTime">
+    
+    <input type="text" id="customReminderText" placeholder="Enter custom reminder message">
+    
+    <button onclick="saveSettings()">Save Settings</button>
+</div>
 
     <script src="tabs.js"></script>
     <script src="dashboard.js"></script>
