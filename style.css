@@ -6,13 +6,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* 📌 Navbar Styling (Fixed & Well-Aligned) */
+/* 📌 Navbar Styling (Horizontal Tabs) */
 .navbar {
     background: rgba(0, 0, 0, 0.3);
     padding: 12px 0;
     position: fixed;
     width: 100%;
     top: 0;
+    left: 0;
     z-index: 1000;
     text-align: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -27,7 +28,7 @@
 }
 
 .navbar ul li {
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 .navbar ul li a {
@@ -45,23 +46,23 @@
     color: white;
 }
 
-/* 🏗️ Fix Overlapping by Adding Padding Below Navbar */
+/* 🏗️ Prevent Overlapping - Add Space Below Navbar */
 body {
     background: linear-gradient(135deg, #1e1e2f, #2c3e50);
     color: #ffffff;
     text-align: center;
-    height: 100vh;
-    padding-top: 70px; /* Ensures content starts below navbar */
+    min-height: 100vh;
+    padding-top: 60px; /* Ensure content starts below navbar */
 }
 
-/* 🌟 Tab Content Styling */
+/* 🌟 Tab Content Styling (Dynamic Section Below Tabs) */
 .tabcontent {
     display: none;
     padding: 25px;
     animation: fadeIn 0.5s ease-in-out;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
-    margin: 20px auto;
+    margin: 70px auto 20px; /* Keep content below navbar */
     max-width: 600px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -161,11 +162,14 @@ button:hover {
 /* 📱 Responsive Fixes */
 @media screen and (max-width: 600px) {
     .navbar ul {
-        flex-direction: column;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 5px;
     }
 
     .navbar ul li {
-        margin: 5px 0;
+        margin: 5px;
     }
 
     .tabcontent {
