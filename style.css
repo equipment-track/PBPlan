@@ -6,29 +6,36 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* 📌 Navbar Styling (Horizontal Tabs) */
+/* 📌 Navbar Styling (Fixed Top, Horizontal, Scrollable) */
 .navbar {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 12px 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 0;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
-    text-align: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .navbar ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    align-items: center;
     padding: 0;
+    overflow-x: auto; /* Allows scrolling if too many tabs */
+    scrollbar-width: none; /* Hide scrollbar for a cleaner look */
+}
+
+.navbar ul::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Webkit browsers */
 }
 
 .navbar ul li {
-    margin: 0 10px;
+    flex-shrink: 0;
+    margin: 0 8px;
 }
 
 .navbar ul li a {
@@ -39,6 +46,7 @@
     padding: 10px 15px;
     border-radius: 5px;
     display: inline-block;
+    white-space: nowrap;
 }
 
 .navbar ul li a:hover {
@@ -52,17 +60,17 @@ body {
     color: #ffffff;
     text-align: center;
     min-height: 100vh;
-    padding-top: 60px; /* Ensure content starts below navbar */
+    padding-top: 60px; /* Ensures content starts below navbar */
 }
 
-/* 🌟 Tab Content Styling (Dynamic Section Below Tabs) */
+/* 🌟 Tab Content Styling (Loads Below Tabs) */
 .tabcontent {
     display: none;
     padding: 25px;
     animation: fadeIn 0.5s ease-in-out;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
-    margin: 70px auto 20px; /* Keep content below navbar */
+    margin: 80px auto 20px; /* Adjusted margin for proper spacing */
     max-width: 600px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
