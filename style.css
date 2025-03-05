@@ -58,16 +58,28 @@ body {
     padding-top: 80px; /* Ensures content starts below navbar */
 }
 
-/* 🌟 Tab Content Styling (Loads Below Tabs) */
+/* 🌟 Tab Content Styling (Horizontal Layout) */
+.tabcontainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
 .tabcontent {
     display: none;
     padding: 25px;
     border-radius: 10px;
     background: #ffffff;
-    margin: 80px auto 20px; /* Adjusted margin for proper spacing */
+    margin: 20px;
     max-width: 600px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.5s ease-in-out;
+    width: 100%;
+}
+
+.tabcontent.active {
+    display: block;
 }
 
 /* 🎬 Smooth Fade-in Animation */
@@ -206,6 +218,11 @@ button:hover {
 
     .navbar ul li {
         margin: 8px 0;
+    }
+
+    .tabcontainer {
+        flex-direction: column;
+        align-items: center;
     }
 
     .tabcontent {
