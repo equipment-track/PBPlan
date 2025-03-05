@@ -29,18 +29,20 @@ function addTransaction() {
     var category = document.getElementById('category').value;
     var otherCategory = document.getElementById('otherCategory').value;
     var amount = document.getElementById('amount').value;
+    var currency = document.getElementById('currency').value;
     
     if (type && date && amount && (category !== "Other" || (category === "Other" && otherCategory))) {
         var transaction = {
             type: type,
             date: date,
             category: category === "Other" ? otherCategory : category,
-            amount: amount
+            amount: amount,
+            currency: currency
         };
         
         var transactionList = document.getElementById('transactionList');
         var li = document.createElement('li');
-        li.textContent = `${transaction.date} | ${transaction.type.toUpperCase()} | ${transaction.category} | ${transaction.amount}`;
+        li.textContent = `${transaction.date} | ${transaction.type.toUpperCase()} | ${transaction.category} | ${transaction.amount} ${transaction.currency}`;
         transactionList.appendChild(li);
 
         alert("Transaction Saved!");
