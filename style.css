@@ -1,58 +1,32 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    background: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
-.navbar {
-    background: #333;
-    overflow: hidden;
-}
-
-.navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.navbar li {
-    display: inline;
-}
-
-.navbar li a {
-    color: white;
-    padding: 14px 20px;
-    text-decoration: none;
-    display: inline-block;
+    margin: 20px;
     text-align: center;
 }
 
-.navbar li a:hover {
-    background-color: #ddd;
-    color: black;
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.tabcontent {
-    display: none;
-}
-
-input, select, button {
-    width: 90%;
-    margin: 5px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid gray;
-}
-
-button {
-    background: blue;
+.tabs button {
+    padding: 10px 20px;
+    background: #007bff;
     color: white;
-    font-weight: bold;
+    border: none;
     cursor: pointer;
 }
 
-canvas {
-    margin-top: 20px;
+.tabs button:hover {
+    background: #0056b3;
+}
+
+.tab-content {
+    display: none;
+}
+
+.active {
+    display: block;
 }
