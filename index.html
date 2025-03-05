@@ -49,12 +49,29 @@
    <div id="Records" class="tabcontent">
     <h3>Transaction History</h3>
     
+    <!-- Currency Switch -->
     <label for="currencySwitch">Select Currency:</label>
     <select id="currencySwitch">
         <option value="QAR">QAR</option>
         <option value="INR">INR</option>
     </select>
 
+    <!-- Filter by Date -->
+    <label for="dateFilter">Filter by Date:</label>
+    <input type="date" id="dateFilter">
+
+    <!-- Filter by Category -->
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter">
+        <option value="">All Categories</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Mobile Payment">Mobile Payment</option>
+        <option value="Grocery">Grocery</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <!-- Display Transactions -->
     <ul id="transactionList"></ul>
 </div>
 
