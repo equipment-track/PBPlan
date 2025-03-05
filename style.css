@@ -1,52 +1,159 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 🎨 Vibrant Background */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    background: linear-gradient(135deg, #1e1e2f, #2c3e50);
+    color: #ffffff;
     text-align: center;
+    height: 100vh;
+}
+
+/* 📌 Navbar Styling */
+.navbar {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-bottom: 2px solid #ff5733;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    padding: 0;
-    background-color: #007bff;
 }
 
 .navbar ul li {
-    margin: 0;
-    padding: 15px 20px;
+    margin: 0 15px;
 }
 
 .navbar ul li a {
-    color: white;
     text-decoration: none;
-    font-size: 18px;
+    color: #ffdd57;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 8px 15px;
+    border-radius: 5px;
 }
 
 .navbar ul li a:hover {
-    background: #0056b3;
-    padding: 15px 20px;
+    background: #ff5733;
+    color: #fff;
 }
 
+/* 🌟 Tab Content */
 .tabcontent {
     display: none;
-    padding: 20px;
+    padding: 80px 20px;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-button {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 📌 Card UI */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px auto;
+    width: 90%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* 📝 Input Fields */
+input, select {
+    width: 90%;
     padding: 10px;
-    background: #007bff;
-    color: white;
+    margin: 10px 0;
     border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    box-shadow: 0px 0px 10px #ff5733;
+}
+
+/* 🔘 Buttons */
+button {
+    background: #ff5733;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #ff7733;
+    transform: scale(1.05);
 }
 
-input, select {
+/* 📊 Pie Chart Styling */
+canvas {
+    margin-top: 20px;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.1);
     padding: 10px;
-    margin: 5px;
-    width: 80%;
+    border-radius: 50%;
+}
+
+/* 🔻 Transaction List */
+#transactionList {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#transactionList li {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+#transactionList li:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* 📱 Responsive */
+@media screen and (max-width: 600px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
 }
