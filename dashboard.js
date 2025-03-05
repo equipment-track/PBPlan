@@ -1,3 +1,4 @@
+// **Load Transactions and Update UI Dynamically**
 function loadDashboard() {
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
     let totalIncome = 0, totalExpense = 0;
@@ -11,17 +12,15 @@ function loadDashboard() {
 
     let totalBalance = totalIncome - totalExpense;
 
-    // Update UI elements dynamically
     document.getElementById("totalIncome").textContent = totalIncome.toFixed(2) + " QAR";
     document.getElementById("totalExpense").textContent = totalExpense.toFixed(2) + " QAR";
     document.getElementById("totalBalance").textContent = totalBalance.toFixed(2) + " QAR";
     document.getElementById("estimatedTarget").textContent = target.toFixed(2) + " QAR";
 
-    // Update the pie chart with new data
     updatePieChart(totalIncome, totalExpense, target);
 }
 
-// **Pie Chart with Google-Style Colors**
+// **Google-Styled Pie Chart**
 function updatePieChart(income, expense, target) {
     let ctx = document.getElementById("pieChart").getContext("2d");
     if (window.pieChartInstance) window.pieChartInstance.destroy();
@@ -32,8 +31,8 @@ function updatePieChart(income, expense, target) {
             labels: ["Income", "Expense", "Target"],
             datasets: [{
                 data: [income, expense, target],
-                backgroundColor: ["#34A853", "#EA4335", "#F4B400"], // Google Colors: Green, Red, Yellow
-                hoverBackgroundColor: ["#2E7D32", "#C62828", "#F57C00"], // Darker shades on hover
+                backgroundColor: ["#34A853", "#EA4335", "#F4B400"], // Google Colors
+                hoverBackgroundColor: ["#2E7D32", "#C62828", "#F57C00"],
                 borderWidth: 2,
             }]
         },
@@ -41,13 +40,7 @@ function updatePieChart(income, expense, target) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    position: "top",
-                    labels: {
-                        color: "#333",
-                        font: { size: 14 }
-                    }
-                },
+                legend: { position: "top", labels: { color: "#333", font: { size: 14 } } },
                 tooltip: {
                     callbacks: {
                         label: function(tooltipItem) {
@@ -63,8 +56,8 @@ function updatePieChart(income, expense, target) {
     });
 }
 
-// Ensure dashboard updates when a new transaction is added
+// **Ensure Dashboard Updates Dynamically**
 document.addEventListener("DOMContentLoaded", () => {
     loadDashboard();
-    window.addEventListener("storage", loadDashboard); // Listen for storage updates
+    window.addEventListener("storage", loadDashboard);
 });
