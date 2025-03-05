@@ -9,14 +9,13 @@
 <body>
 
     <!-- Top Navigation (Tabs) -->
-    <div class="navbar">
-        <ul>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="showTab('Dashboard')">Dashboard</a></li>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="showTab('Transaction')">Transaction Input</a></li>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="showTab('Records')">Records</a></li>
-            <li><a href="javascript:void(0);" class="tablinks" onclick="showTab('Settings')">Settings</a></li>
-        </ul>
-    </div>
+  !-- 📌 Floating Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button onclick="openTab('Dashboard')">🏠 Dashboard</button>
+        <button onclick="openTab('Transaction')">💰 Transactions</button>
+        <button onclick="openTab('Records')">📜 Records</button>
+        <button onclick="openTab('Settings')">⚙️ Settings</button>
+    </nav>
 
    <div id="Dashboard" class="tabcontent">
     <h1>Budget Tracker</h1>
