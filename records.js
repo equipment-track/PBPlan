@@ -39,6 +39,14 @@ function loadTransactions() {
     });
 }
 
+// Function to reset all filters to their default state
+function clearFilters() {
+    document.getElementById("currencySwitch").value = "QAR";  // Reset currency to QAR
+    document.getElementById("dateFilter").value = "";       // Clear date filter
+    document.getElementById("categoryFilter").value = "";   // Clear category filter
+    loadTransactions(); // Reload transactions without any filters
+}
+
 // Event listener to load transactions and handle currency switch
 document.addEventListener("DOMContentLoaded", function () {
     loadTransactions();
@@ -51,4 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // When the category filter changes, reload the transactions
     document.getElementById("categoryFilter").addEventListener("change", loadTransactions);
+
+    // Clear the filters when the "Clear Filters" button is clicked
+    document.getElementById("clearFiltersBtn").addEventListener("click", clearFilters);
 });
