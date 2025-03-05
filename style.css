@@ -190,3 +190,22 @@ button:hover {
         max-width: 90%;
     }
 }
+
+/* Styling for the pie chart */
+#pieChart {
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    border-radius: 10px; /* Optional: Adds rounded corners */
+    background-color: #f0f0f0; /* Optional: Light background behind the chart */
+}
+
+/* Custom Tooltip for the Pie Chart */
+canvas + .chartjs-tooltip {
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+}
