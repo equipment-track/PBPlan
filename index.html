@@ -90,18 +90,24 @@
         <input type="date" id="dateFilter">
     </div>
 
-    <!-- Filter by Category -->
-    <div class="filter-group">
-        <label for="categoryFilter">Filter by Category:</label>
-        <select id="categoryFilter">
-            <option value="">All Categories</option>
-            <option value="Food">Food</option>
-            <option value="Transport">Transport</option>
-            <option value="Mobile Payment">Mobile Payment</option>
-            <option value="Grocery">Grocery</option>
-            <option value="Other">Other</option>
-        </select>
-    </div>
+   <!-- Filter by Category -->
+<div class="filter-group">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter">
+        <option value="">All Categories</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Mobile Payment">Mobile Payment</option>
+        <option value="Grocery">Grocery</option>
+        <option value="Other">Other</option>
+    </select>
+</div>
+
+<!-- Dynamic Input for Other Category -->
+<div class="filter-group" id="otherCategoryGroup" style="display: none;">
+    <label for="otherCategoryInput">Enter Category:</label>
+    <input type="text" id="otherCategoryInput" placeholder="Enter custom category">
+</div>
 
     <!-- Clear Filters Button -->
     <div class="filter-group">
