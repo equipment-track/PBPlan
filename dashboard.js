@@ -1,59 +1,56 @@
-function loadDashboard() {
+// Function to calculate total income and expenses
+function calculateTotals() {
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    let totalIncome = 0, totalExpense = 0, target = parseFloat(localStorage.getItem("monthlyTarget")) || 0;
+    let totalIncome = 0, totalExpense = 0;
 
-    transactions.forEach(tx => {
-        if (tx.type === "income") totalIncome += tx.amount;
-        else totalExpense += tx.amount;
+    transactions.forEach(transaction => {
+        if (transaction.type === "Income") {
+            totalIncome += transaction.amount;
+        } else {
+            totalExpense += transaction.amount;
+        }
     });
 
     let totalBalance = totalIncome - totalExpense;
 
-    // Update UI
-    document.getElementById("totalIncome").textContent = totalIncome.toFixed(2) + " QAR";
-    document.getElementById("totalExpense").textContent = totalExpense.toFixed(2) + " QAR";
-    document.getElementById("estimatedTarget").textContent = target.toFixed(2) + " QAR";
-    document.getElementById("totalBalance").textContent = totalBalance.toFixed(2) + " QAR";
+    // Store calculated values in localStorage for easy retrieval
+    localStorage.setItem("totalIncome", totalIncome);
+    localStorage.setItem("totalExpense", totalExpense);
+    localStorage.setItem("totalBalance", totalBalance);
 
-    // Update Pie Chart
-    updatePieChart(totalIncome, totalExpense, target);
+    // Display values in QAR by default
+    updateDashboardValues("QAR");
 }
 
-// **Pie Chart**
-function updatePieChart(income, expense, target) {
-    let ctx = document.getElementById("pieChart").getContext("2d");
+// Function to update dashboard values based on selected currency
+function updateDashboardValues(currency) {
+    let totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
+    let totalExpense = parseFloat(localStorage.getItem("totalExpense")) || 0;
+    let totalBalance = totalIncome - totalExpense;
+    let estimatedTarget = parseFloat(localStorage.getItem("monthlyTarget")) || 0;
+    let inrRate = parseFloat(localStorage.getItem("inrRate")) || 22.2; // Default conversion rate
 
-    if (window.pieChartInstance) {
-        window.pieChartInstance.destroy();
+    // Convert values to INR if selected
+    if (currency === "INR") {
+        totalIncome = (totalIncome * inrRate).toFixed(2);
+        totalExpense = (totalExpense * inrRate).toFixed(2);
+        totalBalance = (totalBalance * inrRate).toFixed(2);
+        estimatedTarget = (estimatedTarget * inrRate).toFixed(2);
     }
 
-    window.pieChartInstance = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-            labels: ["Income", "Expense", "Target"],
-            datasets: [{
-                data: [income, expense, target],
-                backgroundColor: ["#4CAF50", "#FF5733", "#FFEB3B"],
-                hoverBackgroundColor: ["#388E3C", "#D32F2F", "#FBC02D"],
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom",
-                    labels: {
-                        font: {
-                            size: 14
-                        }
-                    }
-                }
-            }
-        }
-    });
+    // Update UI with converted values
+    document.getElementById("totalIncome").innerText = `${totalIncome} ${currency}`;
+    document.getElementById("totalExpense").innerText = `${totalExpense} ${currency}`;
+    document.getElementById("totalBalance").innerText = `${totalBalance} ${currency}`;
+    document.getElementById("estimatedTarget").innerText = `${estimatedTarget} ${currency}`;
 }
 
-// Load Dashboard on Page Load
-document.addEventListener("DOMContentLoaded", loadDashboard);
+// Event listener for currency switch
+document.getElementById("currencySwitch").addEventListener("change", function () {
+    updateDashboardValues(this.checked ? "INR" : "QAR");
+});
+
+// Load dashboard values on page load
+document.addEventListener("DOMContentLoaded", function () {
+    calculateTotals();
+});
