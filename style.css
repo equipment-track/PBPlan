@@ -53,11 +53,7 @@ header {
     color: white;
 }
 
-/* 📌 Pie Chart */
-canvas {
-    max-width: 300px;
-    margin: 20px auto;
-}
+
 
 /* 📌 Floating Bottom Navigation */
 .bottom-nav {
