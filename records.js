@@ -4,6 +4,7 @@ function loadTransactions() {
     let currencySwitch = document.getElementById("currencySwitch").value;
     let dateFilter = document.getElementById("dateFilter").value;
     let categoryFilter = document.getElementById("categoryFilter").value;
+    let otherCategoryInput = document.getElementById("otherCategoryInput").value.trim();
     let transactionList = document.getElementById("transactionList");
 
     transactionList.innerHTML = ""; // Clear the existing list
@@ -11,12 +12,13 @@ function loadTransactions() {
     // Load the conversion rate for INR to QAR from localStorage
     let conversionRate = parseFloat(localStorage.getItem("inrRate")) || 22.2;
 
+    // Determine the category filter value
+    let finalCategoryFilter = (categoryFilter === "Other") ? otherCategoryInput : categoryFilter;
+
     // Filter the transactions based on date and category
     let filteredTransactions = transactions.filter(tx => {
-        // Filter by date if provided
         let isDateMatch = dateFilter ? tx.date === dateFilter : true;
-        // Filter by category if provided
-        let isCategoryMatch = categoryFilter ? tx.category === categoryFilter : true;
+        let isCategoryMatch = finalCategoryFilter ? tx.category === finalCategoryFilter : true;
         return isDateMatch && isCategoryMatch;
     });
 
@@ -39,27 +41,38 @@ function loadTransactions() {
     });
 }
 
+// Function to show/hide custom category input
+function handleCategoryChange() {
+    let categoryFilter = document.getElementById("categoryFilter").value;
+    let otherCategoryGroup = document.getElementById("otherCategoryGroup");
+
+    if (categoryFilter === "Other") {
+        otherCategoryGroup.style.display = "block";
+    } else {
+        otherCategoryGroup.style.display = "none";
+        document.getElementById("otherCategoryInput").value = ""; // Reset input if not needed
+    }
+
+    loadTransactions(); // Reload transactions when category changes
+}
+
 // Function to reset all filters to their default state
 function clearFilters() {
     document.getElementById("currencySwitch").value = "QAR";  // Reset currency to QAR
     document.getElementById("dateFilter").value = "";       // Clear date filter
     document.getElementById("categoryFilter").value = "";   // Clear category filter
+    document.getElementById("otherCategoryInput").value = ""; // Clear custom category input
+    document.getElementById("otherCategoryGroup").style.display = "none"; // Hide custom category input
     loadTransactions(); // Reload transactions without any filters
 }
 
-// Event listener to load transactions and handle currency switch
+// Event listener to load transactions and handle UI updates
 document.addEventListener("DOMContentLoaded", function () {
     loadTransactions();
 
-    // When the currency selection changes, reload the transactions
     document.getElementById("currencySwitch").addEventListener("change", loadTransactions);
-
-    // When the date filter changes, reload the transactions
     document.getElementById("dateFilter").addEventListener("change", loadTransactions);
-
-    // When the category filter changes, reload the transactions
-    document.getElementById("categoryFilter").addEventListener("change", loadTransactions);
-
-    // Clear the filters when the "Clear Filters" button is clicked
+    document.getElementById("categoryFilter").addEventListener("change", handleCategoryChange);
+    document.getElementById("otherCategoryInput").addEventListener("input", loadTransactions);
     document.getElementById("clearFiltersBtn").addEventListener("click", clearFilters);
 });
