@@ -27,7 +27,7 @@ function updateDashboardValues(currency) {
     let totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
     let totalExpense = parseFloat(localStorage.getItem("totalExpense")) || 0;
     let estimatedTarget = parseFloat(localStorage.getItem("monthlyTarget")) || 0;
-    let totalBalance = monthlyTarget + totalIncome - totalExpense;
+    let totalBalance = estimatedTarget + totalIncome - totalExpense;
     let inrRate = parseFloat(localStorage.getItem("inrRate")) || 22.2; // Default conversion rate
 
     // Convert values to INR if selected
