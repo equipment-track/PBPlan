@@ -38,6 +38,9 @@ function addTransaction() {
     localStorage.setItem("transactions", JSON.stringify(transactions));
 
     alert("Transaction saved!");
+    // Update dashboard totals and UI
+    calculateTotals(); // Recalculate totals
+    updateDashboardValues("QAR"); // Update UI with QAR values (or "INR" if currency switch is checked)
     loadTransactions();
 }
 
