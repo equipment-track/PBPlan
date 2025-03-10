@@ -9,6 +9,7 @@ function addTransaction() {
     let date = document.getElementById("date").value;
     let category = document.getElementById("category").value;
     let amount = parseFloat(document.getElementById("amount").value);
+    let notes = document.getElementById("notes").value; // Capture notes
 
     // Handle "Other" category input
     if (category === "Other") {
@@ -28,8 +29,8 @@ function addTransaction() {
         storedAmount = amount / conversionRate; // Convert to QAR
     }
 
-    // Save the transaction data
-    let transaction = { type, category, amount: storedAmount, date };
+    // Save the transaction data including notes
+    let transaction = { type, category, amount: storedAmount, date, notes }; // Add notes
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
     transactions.push(transaction);
 
