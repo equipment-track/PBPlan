@@ -17,18 +17,37 @@
         <button onclick="openTab('Settings')">⚙️ Settings</button>
     </nav>
 
-   <div id="Dashboard" class="tabcontent">
-    <h1>Budget Tracker</h1>
-    <h2>Estimated Target: <span id="estimatedTarget">0</span> QAR</h2>
-    <h2>Total Income: <span id="totalIncome">0</span> QAR</h2>
-    <h2>Total Expense: <span id="totalExpense">0</span> QAR</h2>
-    <h2>Total Balance: <span id="totalBalance">0</span> QAR</h2>
-    
-    <label class="switch">
-    <input type="checkbox" id="currencySwitch">
-    <span class="slider round"></span>
-</label>
-<span>Show in INR</span>
+  <div id="Dashboard" class="tabcontent">
+    <!-- Currency Switch (Top Right) -->
+    <div class="currency-toggle">
+        <label for="currencySwitch">Show in INR</label>
+        <input type="checkbox" id="currencySwitch">
+    </div>
+
+    <h2>Budget Overview</h2>
+
+    <!-- Dashboard Cards -->
+    <div class="dashboard-container">
+        <div class="card balance-card">
+            Balance
+            <span id="totalBalance">0</span> QAR
+        </div>
+
+        <div class="card income-card">
+            Income
+            <span id="totalIncome">0</span> QAR
+        </div>
+
+        <div class="card expense-card">
+            Expense
+            <span id="totalExpense">0</span> QAR
+        </div>
+
+        <div class="card target-card">
+            Monthly Target
+            <span id="estimatedTarget">0</span> QAR
+        </div>
+    </div>
 </div>
 
     <div id="Transaction" class="tabcontent">
