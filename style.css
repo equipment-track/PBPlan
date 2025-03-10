@@ -24,9 +24,67 @@ header {
     font-size: 22px;
     font-weight: bold;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
-/* 📌 Dashboard Cards */
+/* 📌 Currency Toggle - Top Right */
+.currency-toggle {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #34A853;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+/* 📌 Dashboard Layout */
 .dashboard-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -35,12 +93,14 @@ header {
     margin: 20px auto;
 }
 
+/* 📌 Individual Cards */
 .card {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    text-align: center;
 }
 
 .card:hover {
@@ -48,6 +108,7 @@ header {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* 📌 Balance Card - Full Width */
 .balance-card {
     grid-column: span 2;
     background: #34A853;
@@ -57,13 +118,29 @@ header {
     letter-spacing: 1px;
 }
 
+/* 📌 Income, Expense, Target Cards */
+.income-card {
+    background: #1E88E5;
+    color: white;
+}
+
+.expense-card {
+    background: #EA4335;
+    color: white;
+}
+
+.target-card {
+    background: #FBBC05;
+    color: white;
+}
+
 /* 📌 Floating Bottom Navigation */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     width: 100%;
     background: white;
-    padding: 10px;
+    padding: 12px;
     display: flex;
     justify-content: space-around;
     box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
@@ -75,7 +152,7 @@ header {
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: color 0.2s;
 }
 
 .bottom-nav button:hover {
@@ -133,52 +210,6 @@ button:hover {
 #transactionList li:hover {
     transform: translateY(-5px);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* 📌 Currency Switch */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 24px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #34A853;
-}
-
-input:checked + .slider:before {
-    transform: translateX(24px);
 }
 
 /* 📌 Animations */
