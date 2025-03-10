@@ -1,11 +1,15 @@
-document.addEventListener("DOMContentLoaded", function () {
-    showTab("Dashboard");
-});
+// Function to handle tab switching
+function openTab(tabName) {
+    // Hide all tab contents
+    document.querySelectorAll('.tabcontent').forEach(tab => {
+        tab.style.display = 'none';
+    });
 
-function showTab(tabId) {
-    let tabs = document.getElementsByClassName("tabcontent");
-    for (let tab of tabs) {
-        tab.style.display = "none";
-    }
-    document.getElementById(tabId).style.display = "block";
+    // Show the selected tab
+    document.getElementById(tabName).style.display = 'block';
 }
+
+// Ensure Dashboard is shown by default
+document.addEventListener('DOMContentLoaded', function () {
+    openTab('Dashboard'); 
+});
