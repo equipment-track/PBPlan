@@ -30,7 +30,6 @@ header {
 /* 📌 Currency Toggle - Top Right */
 .currency-toggle {
     position: absolute;
-    top: 50%;
     right: 15px;
     transform: translateY(-50%);
     display: flex;
