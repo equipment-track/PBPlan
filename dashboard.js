@@ -27,6 +27,13 @@ function updateDashboardValues(currency) {
     let totalIncome = parseFloat(localStorage.getItem("totalIncome")) || 0;
     let totalExpense = parseFloat(localStorage.getItem("totalExpense")) || 0;
     let estimatedTarget = parseFloat(localStorage.getItem("monthlyTarget")) || 0;
+
+   // Ensure 2 decimal places for all displayed values
+    totalIncome = totalIncome.toFixed(2);
+    totalExpense = totalExpense.toFixed(2);
+    totalBalance = totalBalance.toFixed(2);
+    estimatedTarget = estimatedTarget.toFixed(2);
+
     let totalBalance = estimatedTarget + totalIncome - totalExpense;
     let inrRate = parseFloat(localStorage.getItem("inrRate")) || 22.2; // Default conversion rate
 
