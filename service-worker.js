@@ -6,7 +6,8 @@ const assets = [
     './transaction.js',
     './records.js',
     './dashboard.js',
-    './
+    './settings.js',
+    './tabs.js',
     './manifest.json',
     './icon-192x192.png',
     './icon-512x512.png'
