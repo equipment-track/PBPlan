@@ -13,7 +13,7 @@ function loadTransactions() {
     let conversionRate = parseFloat(localStorage.getItem("inrRate")) || 22.2;
 
     // Determine the category filter value
-    let finalCategoryFilter = (categoryFilter === "Other") ? otherCategoryInput : categoryFilter;
+    let finalCategoryFilter = categoryFilter === "Other" ? otherCategoryInput : categoryFilter;
 
     // Filter the transactions based on date and category
     let filteredTransactions = transactions.filter(tx => {
@@ -26,17 +26,19 @@ function loadTransactions() {
         let displayAmount = tx.amount;
 
         if (currencySwitch === "INR") {
-            // Convert QAR to INR if the selected currency is INR
-            displayAmount = tx.amount * conversionRate;
-            displayAmount = displayAmount.toFixed(2);
+            displayAmount = (tx.amount * conversionRate).toFixed(2);
         } else {
-            // Display as QAR if the selected currency is QAR
             displayAmount = tx.amount.toFixed(2);
         }
 
         // Create a list item for each filtered transaction
         let listItem = document.createElement("li");
-        listItem.textContent = `${tx.date} - ${tx.category} (${tx.type}): ${displayAmount} ${currencySwitch}`;
+        listItem.innerHTML = `
+            <strong>${tx.date}</strong> - ${tx.category} (${tx.type}): 
+            <span>${displayAmount} ${currencySwitch}</span>
+            ${tx.notes ? `<br><em>Notes: ${tx.notes}</em>` : ""}
+        `;
+
         transactionList.appendChild(listItem);
     });
 }
@@ -56,14 +58,60 @@ function handleCategoryChange() {
     loadTransactions(); // Reload transactions when category changes
 }
 
-// Function to reset all filters to their default state
+// Function to clear transactions for the selected date
+function clearTransactionsByDate() {
+    let selectedDate = document.getElementById("dateFilter").value;
+    
+    if (!selectedDate) {
+        alert("Please select a date to clear transactions.");
+        return;
+    }
+
+    let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+    // Filter out transactions that match the selected date
+    let remainingTransactions = transactions.filter(tx => tx.date !== selectedDate);
+
+    // Update local storage with remaining transactions
+    localStorage.setItem("transactions", JSON.stringify(remainingTransactions));
+
+    alert(`Transactions for ${selectedDate} have been deleted.`);
+    
+    // Reload transactions
+    loadTransactions();
+}
+
+// Function to reset all filters
 function clearFilters() {
-    document.getElementById("currencySwitch").value = "QAR";  // Reset currency to QAR
-    document.getElementById("dateFilter").value = "";       // Clear date filter
-    document.getElementById("categoryFilter").value = "";   // Clear category filter
+    document.getElementById("currencySwitch").value = "QAR"; // Reset currency to QAR
+    document.getElementById("dateFilter").value = ""; // Clear date filter
+    document.getElementById("categoryFilter").value = ""; // Clear category filter
     document.getElementById("otherCategoryInput").value = ""; // Clear custom category input
     document.getElementById("otherCategoryGroup").style.display = "none"; // Hide custom category input
     loadTransactions(); // Reload transactions without any filters
+}
+
+// Function to export transactions to CSV
+function exportToCSV() {
+    let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    if (transactions.length === 0) {
+        alert("No transactions to export!");
+        return;
+    }
+
+    let csvContent = "Date,Category,Type,Amount,Notes\n";
+    transactions.forEach(tx => {
+        let notes = tx.notes ? `"${tx.notes}"` : ""; // Handle optional notes
+        csvContent += `${tx.date},${tx.category},${tx.type},${tx.amount},${notes}\n`;
+    });
+
+    let blob = new Blob([csvContent], { type: "text/csv" });
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "transactions.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
 
 // Event listener to load transactions and handle UI updates
@@ -75,4 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("categoryFilter").addEventListener("change", handleCategoryChange);
     document.getElementById("otherCategoryInput").addEventListener("input", loadTransactions);
     document.getElementById("clearFiltersBtn").addEventListener("click", clearFilters);
+    document.getElementById("clearDateBtn").addEventListener("click", clearTransactionsByDate);
+    document.getElementById("exportCSVBtn").addEventListener("click", exportToCSV);
 });
