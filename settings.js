@@ -11,86 +11,85 @@ function requestNotificationPermission() {
     }
 }
 
-// Save INR & Target
-function saveBudgetSettings() {
+// Save Settings
+function saveSettings() {
     let inrRate = parseFloat(document.getElementById("inrRate").value);
     let monthlyTarget = parseFloat(document.getElementById("targetValue").value);
+    let dailyReminderEnabled = document.getElementById("dailyReminder").checked;
+    let dailyReminderTime = dailyReminderEnabled ? document.getElementById("reminderTime").value : null;
+    let thresholdNotifications = document.getElementById("thresholdNotifications").checked;
 
     if (isNaN(inrRate) || isNaN(monthlyTarget)) {
-        alert("Please enter valid numbers.");
+        alert("Please enter valid numbers for INR rate and Monthly Target.");
         return;
     }
 
     localStorage.setItem("inrRate", inrRate);
     localStorage.setItem("monthlyTarget", monthlyTarget);
-    alert("Budget settings saved!");
-}
-
-// Save Daily & Threshold Notifications
-function saveNotificationSettings() {
-    let dailyReminderEnabled = document.getElementById("dailyReminder").checked;
-    let dailyReminderTime = dailyReminderEnabled ? document.getElementById("reminderTime").value : null;
-    let thresholdEnabled = document.getElementById("thresholdNotifications").checked;
-
+    localStorage.setItem("thresholdNotifications", thresholdNotifications);
     localStorage.setItem("dailyReminderEnabled", dailyReminderEnabled);
     localStorage.setItem("dailyReminderTime", dailyReminderTime);
-    localStorage.setItem("thresholdNotifications", thresholdEnabled);
 
-    alert("Notification settings saved!");
+    alert("Settings saved!");
+}
+
+// Load Settings on Page Load
+function loadSettings() {
+    document.getElementById("inrRate").value = localStorage.getItem("inrRate") || "";
+    document.getElementById("targetValue").value = localStorage.getItem("monthlyTarget") || "";
+    document.getElementById("thresholdNotifications").checked = localStorage.getItem("thresholdNotifications") === "true";
+    document.getElementById("dailyReminder").checked = localStorage.getItem("dailyReminderEnabled") === "true";
+    document.getElementById("reminderTime").value = localStorage.getItem("dailyReminderTime") || "";
+
+    displayReminders();
     scheduleDailyReminder();
+    scheduleThresholdNotifications();
 }
 
-// Show Notifications
-function showNotification(title, message) {
-    if (Notification.permission === "granted") {
-        new Notification(title, { body: message });
-    }
+// Show or Hide Reminder Time Input
+function toggleReminderTimeInput() {
+    let section = document.getElementById("reminderTimeSection");
+    section.style.display = document.getElementById("dailyReminder").checked ? "block" : "none";
 }
 
-// Schedule Daily Reminder
+// Daily Reminder Notification
 function scheduleDailyReminder() {
     let dailyReminderEnabled = localStorage.getItem("dailyReminderEnabled") === "true";
-    let reminderTime = localStorage.getItem("dailyReminderTime");
+    let dailyReminderTime = localStorage.getItem("dailyReminderTime");
 
-    if (dailyReminderEnabled && reminderTime) {
-        let [hours, minutes] = reminderTime.split(":");
+    if (dailyReminderEnabled && dailyReminderTime) {
         let now = new Date();
-        let reminderDate = new Date();
-        reminderDate.setHours(hours, minutes, 0, 0);
+        let reminderTime = new Date();
+        let [hours, minutes] = dailyReminderTime.split(":");
+        reminderTime.setHours(hours, minutes, 0, 0);
 
-        if (reminderDate < now) {
-            reminderDate.setDate(reminderDate.getDate() + 1);
+        if (reminderTime > now) {
+            let delay = reminderTime - now;
+            setTimeout(() => {
+                showNotification("Daily Reminder", "Don't forget to update your expenses!");
+            }, delay);
         }
-
-        let delay = reminderDate - now;
-        setTimeout(() => {
-            showNotification("Daily Reminder", "Don't forget to update your expenses today!");
-            scheduleDailyReminder(); // Reschedule for the next day
-        }, delay);
     }
 }
 
-// Check Threshold Notifications (50%, 75%, 90%, 100%)
-function checkThresholdNotifications() {
+// Threshold Notifications (50%, 75%, 90%, 100%)
+function scheduleThresholdNotifications() {
+    let monthlyTarget = parseFloat(localStorage.getItem("monthlyTarget") || 0);
     let thresholdEnabled = localStorage.getItem("thresholdNotifications") === "true";
-    if (!thresholdEnabled) return;
 
-    let monthlyTarget = parseFloat(localStorage.getItem("monthlyTarget")) || 0;
-    let totalSpent = parseFloat(localStorage.getItem("totalSpent")) || 0;
-    let percentage = (totalSpent / monthlyTarget) * 100;
-
-    if (percentage >= 50 && percentage < 75) {
-        showNotification("Budget Alert", "You have reached 50% of your budget.");
-    } else if (percentage >= 75 && percentage < 90) {
-        showNotification("Budget Alert", "You have reached 75% of your budget.");
-    } else if (percentage >= 90 && percentage < 100) {
-        showNotification("Budget Alert", "You have reached 90% of your budget.");
-    } else if (percentage >= 100) {
-        showNotification("Budget Alert", "You have reached 100% of your budget! Consider reviewing expenses.");
+    if (monthlyTarget > 0 && thresholdEnabled) {
+        let spent = parseFloat(localStorage.getItem("totalExpenses") || 0);
+        let percentages = [50, 75, 90, 100];
+        percentages.forEach(percentage => {
+            let threshold = (monthlyTarget * percentage) / 100;
+            if (spent >= threshold) {
+                showNotification("Budget Alert", `You have spent ${percentage}% of your target!`);
+            }
+        });
     }
 }
 
-// Add Custom Reminders
+// Add Custom Reminder
 function addCustomReminder() {
     let date = document.getElementById("customReminderDate").value;
     let time = document.getElementById("customReminderTime").value;
@@ -110,7 +109,7 @@ function addCustomReminder() {
     scheduleCustomReminder(reminder);
 }
 
-// Display Custom Reminders
+// Display Custom Reminders with Delete Button
 function displayReminders() {
     let reminders = JSON.parse(localStorage.getItem("customReminders")) || [];
     let reminderList = document.getElementById("reminderList");
@@ -119,14 +118,29 @@ function displayReminders() {
     reminders.forEach((reminder, index) => {
         let listItem = document.createElement("li");
         listItem.textContent = `${reminder.date} ${reminder.time} - ${reminder.message}`;
+
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.onclick = () => removeReminder(index);
+        deleteButton.style.marginLeft = "10px";
+
+        listItem.appendChild(deleteButton);
         reminderList.appendChild(listItem);
     });
+}
+
+// Remove Custom Reminder
+function removeReminder(index) {
+    let reminders = JSON.parse(localStorage.getItem("customReminders")) || [];
+    reminders.splice(index, 1);
+    localStorage.setItem("customReminders", JSON.stringify(reminders));
+    displayReminders();
 }
 
 // Schedule Custom Reminder Notifications
 function scheduleCustomReminder(reminder) {
     let now = new Date();
-    let reminderDate = new Date(reminder.date + " " + reminder.time);
+    let reminderDate = new Date(`${reminder.date}T${reminder.time}`);
 
     if (reminderDate > now) {
         let delay = reminderDate - now;
@@ -136,9 +150,15 @@ function scheduleCustomReminder(reminder) {
     }
 }
 
-// Load Settings
+// Show Notifications
+function showNotification(title, message) {
+    if (Notification.permission === "granted") {
+        new Notification(title, { body: message });
+    }
+}
+
+// Load Settings on Page Load
 document.addEventListener("DOMContentLoaded", function () {
     requestNotificationPermission();
-    displayReminders();
-    scheduleDailyReminder();
+    loadSettings();
 });
