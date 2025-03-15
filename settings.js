@@ -162,3 +162,24 @@ document.addEventListener("DOMContentLoaded", function () {
     requestNotificationPermission();
     loadSettings();
 });
+
+// Request notification permission on page load
+document.addEventListener("DOMContentLoaded", () => {
+    if ("Notification" in window) {
+        Notification.requestPermission().then(permission => {
+            console.log("Notification permission:", permission);
+        });
+    }
+});
+
+// Send a test notification when button is clicked
+document.getElementById("notifyBtn").addEventListener("click", () => {
+    if (Notification.permission === "granted") {
+        new Notification("Test Notification", {
+            body: "This is a test push notification!",
+            icon: "icon-192x192.png"
+        });
+    } else {
+        alert("Please allow notifications in your browser settings.");
+    }
+});
