@@ -40,10 +40,10 @@ self.addEventListener('fetch', event => {
 });
 
 // Push Notifications for Custom Reminders
-self.addEventListener('push', event => {
-    const data = event.data.json();
+self.addEventListener("push", event => {
+    const data = event.data ? event.data.json() : { title: "Push", message: "Default push message" };
     self.registration.showNotification(data.title, {
         body: data.message,
-        icon: './icon-192x192.png'
+        icon: "icon-192x192.png"
     });
 });
